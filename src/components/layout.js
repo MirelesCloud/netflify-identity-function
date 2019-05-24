@@ -17,7 +17,7 @@ import Header from "./header"
 import "./layout.css"
 
 const Layout = ({ children }) => {
-  const identity = useNetlifyIdentity();
+  const identity = useNetlifyIdentity('https://netlify-identity-function.netlify.com');
 
   return (
     <StaticQuery
@@ -32,6 +32,7 @@ const Layout = ({ children }) => {
       `}
       render={data => (
         <>
+        <IdentityContextProvider value={identity}>
           <Header siteTitle={data.site.siteMetadata.title} />
           <div
             style={{
@@ -48,6 +49,7 @@ const Layout = ({ children }) => {
               <a href="https://www.gatsbyjs.org">Gatsby</a>
             </footer>
           </div>
+          </IdentityContextProvider>
         </>
       )}
     />
